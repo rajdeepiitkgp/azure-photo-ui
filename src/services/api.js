@@ -15,7 +15,9 @@ export const fetchPhotos = async () => {
 };
 
 export const searchPhotoes = async (searchQuery) => {
-  const response = await axios.get(`/api/photos/search?tags=${searchQuery}`);
+  const response = await axios.get(
+    `${API_BASE_URL}/api/photos/search?tags=${searchQuery}`
+  );
   return response.data;
 };
 
