@@ -1,0 +1,38 @@
+.search-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.search-box {
+  width: 99%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.photo-results li {
+  margin-bottom: 20px;
+}
+
+.photo-results img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message p {
+  color: red;
+  font-size: 14px;
+}
+
