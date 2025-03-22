@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { searchPhotos } from '../services/api';
+import { searchPhotos } from '@/services/api';
 import './SearchPage.css';
-import { PhotoMetadata } from '../types/PhotoMetadata';
+import { PhotoMetadata } from '@/types/PhotoMetadata';
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');

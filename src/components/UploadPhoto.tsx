@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { uploadPhoto } from '../services/api';
+import { uploadPhoto } from '@/services/api';
 
 const UploadPhoto = () => {
   const [file, setFile] = useState<File | null>(null);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchPhotos } from '../services/api';
+import { fetchPhotos } from '@/services/api';
 
 const PhotoGallery = () => {
   const [photos, setPhotos] = useState<string[]>([]);
