@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchPhotos } from '../services/api';
 
 const PhotoGallery = () => {
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState<string[]>([]);
 
   useEffect(() => {
     const getPhotos = async () => {
@@ -34,3 +34,4 @@ const PhotoGallery = () => {
 };
 
 export default PhotoGallery;
+

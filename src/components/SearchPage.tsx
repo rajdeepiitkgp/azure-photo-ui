@@ -1,26 +1,31 @@
 import { useState } from 'react';
-import { searchPhotoes } from '../services/api';
+import { searchPhotos } from '../services/api';
 import './SearchPage.css';
+import { PhotoMetadata } from '../types/PhotoMetadata';
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState<PhotoMetadata[]>([]);
   const [error, setError] = useState('');
 
-  const searchPhotos = async () => {
+  const searchPhotosFromApi = async () => {
     setError('');
     try {
-      const data = await searchPhotoes(searchQuery);
+      const data = await searchPhotos(searchQuery);
       setPhotos(data);
-    } catch (err) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An Unexpected error occured.');
+      }
       setPhotos([]);
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      searchPhotos();
+      searchPhotosFromApi();
     }
   };
 

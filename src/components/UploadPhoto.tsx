@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { uploadPhoto } from '../services/api';
 
 const UploadPhoto = () => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState('');
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+    }
   };
 
   const handleUpload = async () => {
@@ -23,7 +25,11 @@ const UploadPhoto = () => {
       setMessage('Photo uploaded successfully!');
       setFile(null);
     } catch (error) {
-      setMessage('Error uploading photo.' + error.message);
+      if (error instanceof Error) {
+        setMessage('Error uploading photo.' + error.message);
+      } else {
+        setMessage('An Unexpected error occured.');
+      }
     }
   };
 
