@@ -46,8 +46,7 @@ const UploadPhoto = () => {
         setProgress(percent);
       });
       toast.success(`Photo ${file.name} uploaded successfully!`);
-      setFile(null);
-      setPreviewUrl('');
+      clearPhoto();
     } catch (error) {
       toast.error('Upload dailed. Please try again', {
         action: {
