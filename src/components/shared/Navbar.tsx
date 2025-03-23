@@ -5,19 +5,14 @@ import { useMediaQuery } from '@/hooks/MediaHook';
 import { ThemeToggle } from './ThemeToggle';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { NavLinks } from '@/providers/RouterProvider';
 
 const Navbar = () => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  const navLinks = [
-    { label: 'Upload Photo', href: '/' },
-    { label: 'Photo Gallery', href: '/gallery' },
-    { label: 'Photo Search', href: '/search' },
-  ];
-
   const renderLinks = () => (
     <nav className='flex flex-col gap-4 md:flex-row md:gap-6'>
-      {navLinks.map((link) => (
+      {NavLinks.map((link) => (
         <NavLink
           key={link.label}
           to={link.href}
