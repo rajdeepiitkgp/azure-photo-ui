@@ -1,44 +1,112 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { uploadPhoto } from '@/services/api';
+import { toast } from 'sonner';
+import { Input } from './ui/input';
+import { Skeleton } from './ui/skeleton';
+import { Progress } from './ui/progress';
+import { Button } from './ui/button';
+import { Loader2, X } from 'lucide-react';
 
 const UploadPhoto = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [message, setMessage] = useState('');
+  const [previewUrl, setPreviewUrl] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0]);
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.type.startsWith('image/')) {
+      setFile(selectedFile);
+      const preview = URL.createObjectURL(selectedFile);
+      setPreviewUrl(preview);
+    } else {
+      toast.error('Please select a valid image file');
     }
   };
-
+  const clearPhoto = () => {
+    setFile(null);
+    setPreviewUrl('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
   const handleUpload = async () => {
     if (!file) {
-      setMessage('Please select a file.');
+      toast.warning('No file selected. Please select an image to upload.');
       return;
     }
-
-    const formData = new FormData();
-    formData.append('photo', file);
+    setIsUploading(true);
+    setProgress(0);
 
     try {
-      await uploadPhoto(formData);
-      setMessage('Photo uploaded successfully!');
+      const formData = new FormData();
+      formData.append('photo', file);
+      await uploadPhoto(formData, (percent) => {
+        setProgress(percent);
+      });
+      toast.success(`Photo ${file.name} uploaded successfully!`);
       setFile(null);
+      setPreviewUrl('');
     } catch (error) {
-      if (error instanceof Error) {
-        setMessage('Error uploading photo.' + error.message);
-      } else {
-        setMessage('An Unexpected error occured.');
-      }
+      toast.error('Upload dailed. Please try again', {
+        action: {
+          label: 'Retry',
+          onClick: () => handleUpload(),
+        },
+      });
+    } finally {
+      setIsUploading(false);
+      setProgress(0);
     }
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Upload a Photo</h1>
-      <input type='file' accept='image/*' onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
-      {message && <p>{message}</p>}
+    <div className='flex flex-col items-center justify-center min-h-screen px-4 py-8 gap-6 sm:px-6 lg:px-8'>
+      <h1 className='text-2xl font-semibold text-center'>Upload Your Photo</h1>
+
+      <div className='w-full max-w-md space-y-4'>
+        <Input
+          type='file'
+          accept='image/*'
+          onChange={handleFileChange}
+          disabled={isUploading}
+          ref={fileInputRef}
+        />
+
+        {previewUrl ? (
+          <div className='relative w-full aspect-video border border-dashed border-gray-300 rounded-md flex items-center justify-center overflow-hidden bg-muted'>
+            <img
+              src={previewUrl}
+              alt='Preview'
+              className='object-cover w-full h-full'
+            />
+            <button
+              onClick={clearPhoto}
+              className='absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none'
+            >
+              <X className='w-5 h-5 text-black' />
+            </button>
+          </div>
+        ) : (
+          <Skeleton className='w-full aspect-video rounded-md' />
+        )}
+        {isUploading && <Progress value={progress} className='w-full h-2' />}
+        <Button
+          onClick={handleUpload}
+          disabled={isUploading || !file}
+          className='w-full py-6 text-base'
+        >
+          {isUploading ? (
+            <>
+              <Loader2 className='w-4 h-4 mr-2 animate-spin' />
+              Uploading...
+            </>
+          ) : (
+            'Upload'
+          )}
+        </Button>
+      </div>
     </div>
   );
 };
