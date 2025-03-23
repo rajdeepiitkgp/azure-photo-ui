@@ -3,9 +3,24 @@
     {
       "route": "/*",
       "serve": "/index.html",
-      "statusCode": 200
+      "statusCode": 200,
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/login",
+      "rewrite": "/.auth/login/aad"
+    },
+    {
+      "route": "/logout",
+      "redirect": "/.auth/logout"
     }
   ],
+  "responseOverrides": {
+    "401": {
+      "redirect": "/login",
+      "statusCode": 302
+    }
+  },
   "navigationFallback": {
     "rewrite": "index.html",
     "exclude": ["*.{png,jpg,gif,ico,svg}", "*.{css,scss,js}"]
