@@ -1,36 +1,7 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-}
-
-nav ul {
-  list-style: none;
-  padding: 10px;
-  background-color: #333;
-  margin: 0;
-  display: flex;
-}
-
-nav ul li {
-  margin-right: 20px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
-}
 
 :root {
   --radius: 0.625rem;
