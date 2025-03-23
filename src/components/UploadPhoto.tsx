@@ -74,7 +74,7 @@ const UploadPhoto = () => {
         />
 
         {previewUrl ? (
-          <div className='relative w-full aspect-video border border-dashed border-gray-300 rounded-md flex items-center justify-center overflow-hidden bg-muted'>
+          <div className='relative w-full aspect-video border border-dashed border-muted-foreground rounded-md flex items-center justify-center overflow-hidden bg-muted'>
             <img
               src={previewUrl}
               alt='Preview'
@@ -82,9 +82,9 @@ const UploadPhoto = () => {
             />
             <button
               onClick={clearPhoto}
-              className='absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none'
+              className='absolute top-2 right-2 bg-foreground p-2 rounded-full shadow-md hover:bg-foreground/70 focus:outline-none'
             >
-              <X className='w-5 h-5 text-black' />
+              <X className='w-5 h-5 text-background' />
             </button>
           </div>
         ) : (
