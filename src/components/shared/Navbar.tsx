@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/MediaHook';
 import { ThemeToggle } from './ThemeToggle';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import { cn } from '@/lib/utils';
 import { NavLinks } from '@/providers/RouterProvider';
 
@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const renderLinks = () => (
     <nav className='flex flex-col gap-4 md:flex-row md:gap-6'>
-      {NavLinks.map((link) => (
+      {NavLinks.filter((navlink) => navlink.isNavLink).map((link) => (
         <NavLink
           key={link.label}
           to={link.href}

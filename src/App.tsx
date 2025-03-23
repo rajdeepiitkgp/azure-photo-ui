@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import Navbar from './components/shared/Navbar';
 import { NavLinks } from './providers/RouterProvider';
