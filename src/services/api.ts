@@ -56,3 +56,19 @@ export const fetchPhotoById = async (id: string) => {
   return response.data;
 };
 
+export const getPhotoById = async (id: string) => {
+  const response = await axios.get<PhotoMetadata>(
+    `${API_BASE_URL}/api/photosV2/search`,
+    {
+      params: { id },
+    }
+  );
+  return response.data;
+};
+
+export const deletePhotoById = async (id: string) => {
+  await axios.delete(`${API_BASE_URL}/api/photos`, {
+    params: { id },
+  });
+};
+
