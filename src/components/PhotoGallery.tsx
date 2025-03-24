@@ -44,7 +44,11 @@ const PhotoGallery = () => {
       {error && (
         <div className='flex flex-col items-center justify-center py-12 space-y-4'>
           <p className='text-destructive text-sm font-medium'>{error}</p>
-          <Button variant='outline' onClick={getPhotos}>
+          <Button
+            variant='outline'
+            onClick={getPhotos}
+            className='cursor-pointer'
+          >
             Retry
           </Button>
         </div>
