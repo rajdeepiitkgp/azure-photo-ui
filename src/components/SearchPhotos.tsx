@@ -16,7 +16,7 @@ const sanitizeTag = (tag: string) =>
     .replace(/[^a-z0-9 ]+/g, '')
     .trim();
 
-const SearchPage = () => {
+const SearchPhotos = () => {
   const [inputTag, setInputTag] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [photos, setPhotos] = useState<PhotoMetadata[]>([]);
@@ -76,7 +76,9 @@ const SearchPage = () => {
 
   return (
     <div className='flex flex-col min-h-screen p-4 space-y-6 max-w-7xl mx-auto'>
-      <h1 className='text-2xl font-semibold text-center'>Search Photos</h1>
+      <h1 className='text-2xl font-semibold text-center'>
+        Search Photos By Tags
+      </h1>
       <div className='flex flex-col gap-4 max-w-lg mx-auto'>
         <div className='flex items-center border border-input rounded-md p-2'>
           <Input
@@ -192,5 +194,5 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default SearchPhotos;
 
