@@ -82,7 +82,7 @@ const UploadPhoto = () => {
             />
             <button
               onClick={clearPhoto}
-              className='absolute top-2 right-2 bg-foreground p-2 rounded-full shadow-md hover:bg-foreground/70 focus:outline-none'
+              className='absolute top-2 right-2 bg-foreground p-2 rounded-full shadow-md cursor-pointer hover:bg-foreground/70 focus:outline-none'
             >
               <X className='w-5 h-5 text-background' />
             </button>
@@ -94,7 +94,7 @@ const UploadPhoto = () => {
         <Button
           onClick={handleUpload}
           disabled={isUploading || !file}
-          className='w-full py-6 text-base'
+          className='w-full py-6 text-base cursor-pointer'
         >
           {isUploading ? (
             <>

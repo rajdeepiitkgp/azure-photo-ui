@@ -111,7 +111,11 @@ const PhotoDetail = () => {
       {error && (
         <div className='text-center space-y-4'>
           <p className='text-destructive text-lg font-semibold'>{error}</p>
-          <Button variant='outline' onClick={fetchPhotoDetails}>
+          <Button
+            variant='outline'
+            onClick={fetchPhotoDetails}
+            className='cursor-pointer'
+          >
             Retry
           </Button>
         </div>
@@ -146,13 +150,19 @@ const PhotoDetail = () => {
           </div>
 
           <div className='flex flex-col sm:flex-row gap-4'>
-            <Button onClick={handleDownload} className='flex-1 text-base py-6'>
+            <Button
+              onClick={handleDownload}
+              className='flex-1 text-base py-6 cursor-pointer'
+            >
               Download
             </Button>
 
             <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
               <DialogTrigger asChild>
-                <Button variant='destructive' className='flex-1 text-base py-6'>
+                <Button
+                  variant='destructive'
+                  className='flex-1 text-base py-6 cursor-pointer'
+                >
                   Delete
                 </Button>
               </DialogTrigger>
@@ -172,6 +182,7 @@ const PhotoDetail = () => {
                       <Button
                         variant='outline'
                         onClick={() => setDeleteModalOpen(false)}
+                        className='cursor-pointer'
                         disabled={deleting}
                       >
                         Cancel
@@ -180,6 +191,7 @@ const PhotoDetail = () => {
                       <Button
                         variant='destructive'
                         onClick={handleDeleteConfirm}
+                        className='cursor-pointer'
                         disabled={deleting}
                       >
                         {deleting ? 'Deleting...' : 'Delete'}

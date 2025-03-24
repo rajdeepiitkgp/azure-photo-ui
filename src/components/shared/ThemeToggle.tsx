@@ -18,7 +18,12 @@ export const ThemeToggle = () => {
     setTheme(isDark ? 'light' : 'dark');
   };
   return (
-    <Button variant='outline' size='icon' onClick={toggleTheme}>
+    <Button
+      variant='outline'
+      size='icon'
+      onClick={toggleTheme}
+      className='cursor-pointer'
+    >
       <Sun
         className={cn(
           'h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0',
